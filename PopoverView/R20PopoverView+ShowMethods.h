@@ -42,5 +42,6 @@
 
 //Does the same as above, but with a title
 - (void)showAtPoint:(CGPoint)point inView:(UIView *)view withTitle:(NSString *)title withStringArray:(NSArray *)stringArray withImageArray:(NSArray *)imageArray;
+- (void)showAtPoint:(CGPoint)point inView:(UIView *)view withTitle:(NSString *)title withStringArray:(NSArray *)stringArray withImageArray:(NSArray *)imageArray imagesOnTheLeft:(BOOL)imagesOnTheLeft;
 
 @end

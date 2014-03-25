@@ -57,6 +57,12 @@
     return popoverView;
 }
 
++ (R20PopoverView *)showPopoverAtPoint:(CGPoint)point inView:(UIView *)view withTitle:(NSString *)title withStringArray:(NSArray *)stringArray withImageArray:(NSArray *)imageArray imagesOnTheLeft:(BOOL)left delegate:(id <PopoverViewDelegate>)delegate {
+    R20PopoverView *popoverView = [[R20PopoverView alloc] initWithFrame:CGRectZero delegate:delegate];
+    [popoverView showAtPoint:point inView:view withTitle:title withStringArray:stringArray withImageArray:imageArray imagesOnTheLeft:left];
+    return popoverView;
+}
+
 + (R20PopoverView *)showPopoverAtPoint:(CGPoint)point inView:(UIView *)view withTitle:(NSString *)title withContentView:(UIView *)cView delegate:(id <PopoverViewDelegate>)delegate {
     R20PopoverView *popoverView = [[R20PopoverView alloc] initWithFrame:CGRectZero delegate:delegate];
     [popoverView showAtPoint:point inView:view withTitle:title withContentView:cView];

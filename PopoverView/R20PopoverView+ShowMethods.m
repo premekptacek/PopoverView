@@ -52,7 +52,7 @@
         //Create a label for the title text.
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
         titleSize = [title sizeWithAttributes:@{
-                NSFontAttributeName:self.titleFont
+                NSFontAttributeName : self.titleFont
         }];
 #else
         titleSize = [title sizeWithFont:self.titleFont];
@@ -155,6 +155,10 @@
 }
 
 - (void)showAtPoint:(CGPoint)point inView:(UIView *)view withTitle:(NSString *)title withStringArray:(NSArray *)stringArray withImageArray:(NSArray *)imageArray {
+    [self showAtPoint:point inView:view withTitle:title withStringArray:stringArray withImageArray:imageArray imagesOnTheLeft:NO];
+}
+
+- (void)showAtPoint:(CGPoint)point inView:(UIView *)view withTitle:(NSString *)title withStringArray:(NSArray *)stringArray withImageArray:(NSArray *)imageArray imagesOnTheLeft:(BOOL)imagesOnTheLeft {
     NSAssert((stringArray.count == imageArray.count), @"stringArray.count should equal imageArray.count");
     [self prepareForAppearance];
 
@@ -184,19 +188,36 @@
         //a UIImageView for it.
         UIImageView *imageView = [[UIImageView alloc] initWithImage:imageArray[i]];
 
-        //Take the larger of the two widths as the width for the container
-        CGFloat containerWidth = MAX(imageView.frame.size.width, label.frame.size.width);
-        CGFloat containerHeight = label.frame.size.height + self.imageTopPadding + self.imageBottomPadding + imageView.frame.size.height;
+        CGFloat containerWidth;
+        CGFloat containerHeight;
+        if (imagesOnTheLeft) {
+            // Take the larger of the two heights as the height for the container, width is sum of widths
+            containerWidth = self.imageTopPadding + self.imageBottomPadding + imageView.frame.size.width + label.frame.size.width;
+            containerHeight = MAX(label.frame.size.height, imageView.frame.size.height);
+        } else {
+            // Take the larger of the two widths as the width for the container
+            containerWidth = MAX(imageView.frame.size.width, label.frame.size.width);
+            containerHeight = label.frame.size.height + self.imageTopPadding + self.imageBottomPadding + imageView.frame.size.height;
+        }
 
         //This container will hold both the image and the label
         UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, containerWidth, containerHeight)];
 
-        //Now we do the frame manipulations to put the imageView on top of the label, both centered
-        imageView.frame = CGRectMake(floorf(containerWidth * 0.5f - imageView.frame.size.width * 0.5f), self.imageTopPadding, imageView.frame.size.width, imageView.frame.size.height);
-        label.frame = CGRectMake(floorf(containerWidth * 0.5f - label.frame.size.width * 0.5f), imageView.frame.size.height + self.imageBottomPadding + self.imageTopPadding, label.frame.size.width, label.frame.size.height);
+        if (imagesOnTheLeft) {
+            //Now we do the frame manipulations to put the imageView on top of the label, both centered
+            imageView.frame = CGRectMake(floorf(containerWidth * 0.5f - imageView.frame.size.width * 0.5f), self.imageTopPadding, imageView.frame.size.width, imageView.frame.size.height);
+            label.frame = CGRectMake(floorf(containerWidth * 0.5f - label.frame.size.width * 0.5f), imageView.frame.size.height + self.imageBottomPadding + self.imageTopPadding, label.frame.size.width, label.frame.size.height);
+        } else {
+            //Now we do the frame manipulations to put the imageView on left of the label, both centered
+            imageView.frame = CGRectMake(self.imageTopPadding, floorf(containerHeight * 0.5f - imageView.frame.size.height * 0.5f), imageView.frame.size.width, imageView.frame.size.height);
+            label.frame = CGRectMake(self.imageTopPadding + imageView.frame.size.width + self.imageBottomPadding, floorf(containerHeight * 0.5f - label.frame.size.height * 0.5f), label.frame.size.width, label.frame.size.height);
+        }
 
         [containerView addSubview:imageView];
         [containerView addSubview:label];
+
+        if (imagesOnTheLeft) // left align all images
+            containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 
 
         [tempViewArray addObject:containerView];
