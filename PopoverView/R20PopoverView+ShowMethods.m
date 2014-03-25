@@ -204,13 +204,13 @@
         UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, containerWidth, containerHeight)];
 
         if (imagesOnTheLeft) {
-            //Now we do the frame manipulations to put the imageView on top of the label, both centered
-            imageView.frame = CGRectMake(floorf(containerWidth * 0.5f - imageView.frame.size.width * 0.5f), self.imageTopPadding, imageView.frame.size.width, imageView.frame.size.height);
-            label.frame = CGRectMake(floorf(containerWidth * 0.5f - label.frame.size.width * 0.5f), imageView.frame.size.height + self.imageBottomPadding + self.imageTopPadding, label.frame.size.width, label.frame.size.height);
-        } else {
             //Now we do the frame manipulations to put the imageView on left of the label, both centered
             imageView.frame = CGRectMake(self.imageTopPadding, floorf(containerHeight * 0.5f - imageView.frame.size.height * 0.5f), imageView.frame.size.width, imageView.frame.size.height);
             label.frame = CGRectMake(self.imageTopPadding + imageView.frame.size.width + self.imageBottomPadding, floorf(containerHeight * 0.5f - label.frame.size.height * 0.5f), label.frame.size.width, label.frame.size.height);
+        } else {
+            //Now we do the frame manipulations to put the imageView on top of the label, both centered
+            imageView.frame = CGRectMake(floorf(containerWidth * 0.5f - imageView.frame.size.width * 0.5f), self.imageTopPadding, imageView.frame.size.width, imageView.frame.size.height);
+            label.frame = CGRectMake(floorf(containerWidth * 0.5f - label.frame.size.width * 0.5f), imageView.frame.size.height + self.imageBottomPadding + self.imageTopPadding, label.frame.size.width, label.frame.size.height);
         }
 
         [containerView addSubview:imageView];
