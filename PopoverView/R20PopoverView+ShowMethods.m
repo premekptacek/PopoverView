@@ -123,14 +123,16 @@
 }
 
 - (void)showAtPoint:(CGPoint)point inView:(UIView *)view withTitle:(NSString *)title withStringArray:(NSArray *)stringArray {
+    [self prepareForAppearance];
+
     NSMutableArray *labelArray = [[NSMutableArray alloc] initWithCapacity:stringArray.count];
 
     UIFont *font = self.textFont;
 
     for (NSString *string in stringArray) {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
-        CGSize textSize = [title sizeWithAttributes:@{
-                NSFontAttributeName:self.titleFont
+        CGSize textSize = [string sizeWithAttributes:@{
+                NSFontAttributeName : font
         }];
 #else
         CGSize textSize = [string sizeWithFont:font];
@@ -164,8 +166,8 @@
 
         //First we build a label for the text to set in.
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
-        CGSize textSize = [title sizeWithAttributes:@{
-                NSFontAttributeName:self.titleFont
+        CGSize textSize = [string sizeWithAttributes:@{
+                NSFontAttributeName : font
         }];
 #else
         CGSize textSize = [string sizeWithFont:font];
