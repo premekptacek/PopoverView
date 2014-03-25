@@ -4,6 +4,7 @@ Pod::Spec.new do |s|
     s.version = "0.1.0"
     s.summary = "A simple UIView popover control for iPhone/iPad written with CoreGraphics."
     s.homepage = "https://github.com/dzindra/PopoverView"
+    s.requires_arc = true
     s.license = {
         :type => 'MIT',
         :text => <<-LICENSE
