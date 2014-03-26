@@ -11,7 +11,7 @@
 
 @class R20PopoverView;
 
-@protocol PopoverViewDelegate <NSObject>
+@protocol R20PopoverViewDelegate <NSObject>
 
 @optional
 
@@ -43,7 +43,7 @@
 
 @property (nonatomic, strong) NSArray *dividerRects;
 
-@property (nonatomic, weak) id<PopoverViewDelegate> delegate;
+@property (nonatomic, weak) id<R20PopoverViewDelegate> delegate;
 
 #pragma mark - Appearance
 
@@ -155,7 +155,7 @@
 @property (nonatomic) CGFloat borderWidth UI_APPEARANCE_SELECTOR;
 
 
-- (instancetype)initWithFrame:(CGRect)frame delegate:(id<PopoverViewDelegate>)delegate;
+- (instancetype)initWithFrame:(CGRect)frame delegate:(id<R20PopoverViewDelegate>)delegate;
 
 #pragma mark - Instance Showing Methods
 

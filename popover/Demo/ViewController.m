@@ -35,7 +35,7 @@
     @"Table view with title"]
 
 
-@interface ViewController () <PopoverViewDelegate, UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+@interface ViewController () <R20PopoverViewDelegate, UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property(nonatomic, weak) IBOutlet UILabel *tapAnywhereLabel;
 @property(nonatomic, weak) IBOutlet UIPickerView *pickerView;

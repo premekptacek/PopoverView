@@ -26,7 +26,7 @@
     return [self initWithFrame:frame delegate:nil];
 }
 
-- (instancetype)initWithFrame:(CGRect)frame delegate:(id <PopoverViewDelegate>)delegate {
+- (instancetype)initWithFrame:(CGRect)frame delegate:(id <R20PopoverViewDelegate>)delegate {
     self = [super initWithFrame:frame];
     if (self) {
         _delegate = delegate;
