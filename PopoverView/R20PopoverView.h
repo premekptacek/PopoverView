@@ -43,7 +43,7 @@
 
 @property (nonatomic, strong) NSArray *dividerRects;
 
-@property (nonatomic, weak) id<R20PopoverViewDelegate> delegate;
+@property (nonatomic, strong) id<R20PopoverViewDelegate> delegate;
 
 #pragma mark - Appearance
 
